@@ -9,7 +9,7 @@ export const Container = styled.SafeAreaView`
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
 `
 
