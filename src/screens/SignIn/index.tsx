@@ -1,15 +1,14 @@
-import React, { useState, useEffect, useContext, createRef } from 'react'
-import { useNavigation } from '@react-navigation/native'
-import { StackNavigationProp } from '@react-navigation/stack'
+import React, { useState, useEffect, useContext, createRef } from "react";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import {
   ActivityIndicator,
   Alert,
   Keyboard,
   TextInput,
   Vibration,
-} from 'react-native'
-import { RootStackParamList } from '../../stacks/MainStack'
-
+} from "react-native";
+import { RootStackParamList } from "../../stacks/MainStack";
 
 import {
   Wrapper,
@@ -23,26 +22,28 @@ import {
   ForgotPassword,
   ForgotPasswordText,
   Error,
-} from './styles'
+} from "./styles";
+import { Input } from "../../components/Input";
+import { Controller, useForm } from "react-hook-form";
 
-type loginScreenProp = StackNavigationProp<RootStackParamList, 'SignIn'>
+type loginScreenProp = StackNavigationProp<RootStackParamList, "SignIn">;
 
 const SignIn = () => {
-  const [email, setEmail] = useState('')
-  const [emailError, setEmailError] = useState('')
-  const [signInError, setSignInError] = useState('')
-  const [password, setPassword] = useState('')
-  const [passwordError, setPasswordError] = useState('')
-  const emailInput = createRef<TextInput>()
-  const passwordInput = createRef<TextInput>()
-  const [loading, setLoading] = useState(false)
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [signInError, setSignInError] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const emailInput = createRef<TextInput>();
+  const passwordInput = createRef<TextInput>();
+  const [loading, setLoading] = useState(false);
 
-  const navigation = useNavigation<loginScreenProp>()
+  const navigation = useNavigation<loginScreenProp>();
 
   const validData = (): boolean => {
-    setEmailError('')
-    setPasswordError('')
-    setSignInError('')
+    setEmailError("");
+    setPasswordError("");
+    setSignInError("");
 
     if (
       !email
@@ -51,66 +52,68 @@ const SignIn = () => {
           /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
         )
     ) {
-      Vibration.vibrate()
-      setEmailError('Email inválido')
-      return false
+      Vibration.vibrate();
+      setEmailError("Email inválido");
+      return false;
     }
     if (password.length < 6) {
-      Vibration.vibrate()
-      setPasswordError('Senha muito curta')
-      return false
+      Vibration.vibrate();
+      setPasswordError("Senha muito curta");
+      return false;
     }
-    return true
-  }
+    return true;
+  };
+
+  const { control, handleSubmit } = useForm();
+
+  const onSubmit = (data) => console.log(data);
 
   return (
     <Wrapper>
       <DimissisKeyboard onPress={Keyboard.dismiss}>
         <Authentication>
-          <AuthInput
-            ref={emailInput}
-            invalid={emailError !== ''}
-            placeholder="Email"
-            value={email}
-            onChangeText={(text: string) => setEmail(text)}
-            autoCompleteType="email"
-            autoCapitalize="none"
-            keyboardType="email-address"
-            autoCorrect={false}
-            caretHidden={false}
-            returnKeyType="next"
-            onSubmitEditing={() => passwordInput.current?.focus()}
+          <Controller
+            name="email"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <Input
+                placeholder="E-mail"
+                autoCompleteType="email"
+                autoCapitalize="none"
+                keyboardType="email-address"
+                autoCorrect={false}
+                value={value}
+                onChangeText={onChange}
+              />
+            )}
           />
-          <Error>{emailError}</Error>
-          <AuthInput
-            ref={passwordInput}
-            invalid={passwordError !== ''}
-            secureTextEntry
-            placeholder="Senha"
-            value={password}
-            onChangeText={(text: string) => setPassword(text)}
-            autoCorrect={false}
-            autoCapitalize="none"
-            autoCompleteType="password"
-            
+          <Controller
+            name="password"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <Input
+                secureTextEntry
+                placeholder="Senha"
+                autoCorrect={false}
+                autoCapitalize="none"
+                autoCompleteType="password"
+                value={value}
+                onChangeText={onChange}
+              />
+            )}
           />
-          <Error>{passwordError}</Error>
-          <Error>{signInError}</Error>
-          <ForgotPassword
-            onPress={() => {
-              
-            }}
-          >
+
+          <ForgotPassword onPress={() => {}}>
             <ForgotPasswordText>Esqueceu a senha?</ForgotPasswordText>
           </ForgotPassword>
-          <LoginButton onPress={() => {}} disabled={loading}>
+          <LoginButton onPress={handleSubmit(onSubmit)} disabled={loading}>
             {loading ? (
               <ActivityIndicator size="large" color="#fff" />
             ) : (
               <LoginButtonText>Entrar</LoginButtonText>
             )}
           </LoginButton>
-          <CreateAccountButton onPress={() => navigation.navigate('SignUp')}>
+          <CreateAccountButton onPress={() => navigation.navigate("SignUp")}>
             <CreateAccountButtonText>Criar Conta</CreateAccountButtonText>
           </CreateAccountButton>
         </Authentication>
@@ -127,7 +130,7 @@ const SignIn = () => {
         </OtherAuthentications> */}
       </DimissisKeyboard>
     </Wrapper>
-  )
-}
+  );
+};
 
-export default SignIn
+export default SignIn;
