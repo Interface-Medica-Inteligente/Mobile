@@ -6,6 +6,7 @@ import {
   Alert,
   Keyboard,
   TextInput,
+  Text,
   Vibration,
 } from "react-native";
 import { RootStackParamList } from "../../stacks/MainStack";
@@ -22,10 +23,14 @@ import {
   ForgotPassword,
   ForgotPasswordText,
   Error,
+  Title,
+  Logo
 } from "./styles";
 import { Input } from "../../components/Input";
+import { ButtonLarge } from "../../components/ButtonLarge";
 import { Controller, useForm } from "react-hook-form";
-
+import LogoType from "../../components/LogoType";
+ 
 type loginScreenProp = StackNavigationProp<RootStackParamList, "SignIn">;
 
 const SignIn = () => {
@@ -71,7 +76,9 @@ const SignIn = () => {
   return (
     <Wrapper>
       <DimissisKeyboard onPress={Keyboard.dismiss}>
+      <LogoType />
         <Authentication>
+        <Title>Login</Title>
           <Controller
             name="email"
             control={control}
@@ -106,15 +113,12 @@ const SignIn = () => {
           <ForgotPassword onPress={() => {}}>
             <ForgotPasswordText>Esqueceu a senha?</ForgotPasswordText>
           </ForgotPassword>
-          <LoginButton onPress={handleSubmit(onSubmit)} disabled={loading}>
-            {loading ? (
-              <ActivityIndicator size="large" color="#fff" />
-            ) : (
-              <LoginButtonText>Entrar</LoginButtonText>
-            )}
-          </LoginButton>
+          <ButtonLarge onPress={handleSubmit(onSubmit)} disabled={loading} text="Entrar">
+            <LoginButtonText>Entrar</LoginButtonText>
+          </ButtonLarge>
           <CreateAccountButton onPress={() => navigation.navigate("SignUp")}>
-            <CreateAccountButtonText>Criar Conta</CreateAccountButtonText>
+            <Text>Não tem conta?</Text>
+            <CreateAccountButtonText>Cadastre-se</CreateAccountButtonText>
           </CreateAccountButton>
         </Authentication>
         {/* <OtherAuthentications>

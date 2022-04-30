@@ -12,7 +12,7 @@ export const Wrapper = styled.SafeAreaView`
   flex: 1;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
+  background-color: #00CEC8;
   padding-top: 20%;
 `;
 
@@ -24,15 +24,31 @@ export const DimissisKeyboard = styled.Pressable`
   justify-content: center;
 `;
 
-export const Logo = styled.Image`
-  margin-top: 30%;
-  margin-bottom: 5px;
+export const Title = styled.Text`
+  margin-top: 15%;
+  margin-bottom: 20%;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 38px;
+  text-align: center;
+
+  color: #00CEC8;
 `;
 
-export const Authentication = styled.View`
-  width: 85%;
+export const Logo = styled.View`
+`;
+
+export const Authentication = styled.ScrollView`
+  width: 100%;
+  margin-top: 15%;
+  padding: 0% 8%;
   flex: 1;
   align-self: center;
+  background-color: #FFF;
+  border-top-left-radius: 53px;
+
 `;
 
 interface AuthInputProps {
@@ -100,7 +116,10 @@ export const LoginButtonText = styled.Text`
 
 export const CreateAccountButton = styled.TouchableOpacity`
   width: 100%;
+  margin-top: 21.5%;
   height: 63px;
+  display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
 `;
@@ -108,9 +127,14 @@ export const CreateAccountButton = styled.TouchableOpacity`
 export const CreateAccountButtonText = styled.Text`
   font-family: Roboto;
   font-style: normal;
-  font-weight: bold;
-  font-size: 16px;
-  color: #4ecf72;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+/* identical to box height */
+
+
+color: #00CEC8;
+  margin-left: 3px;
 `;
 
 export const OtherAuthentications = styled.View`
