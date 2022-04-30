@@ -25,6 +25,7 @@ import {
 } from "./styles";
 import { Input } from "../../components/Input";
 import { Controller, useForm } from "react-hook-form";
+import { Select } from "../../components/Select";
 
 type loginScreenProp = StackNavigationProp<RootStackParamList, "SignIn">;
 
@@ -72,6 +73,22 @@ const SignIn = () => {
     <Wrapper>
       <DimissisKeyboard onPress={Keyboard.dismiss}>
         <Authentication>
+          <Controller
+            name="genre"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <Select
+                data={[
+                  { key: "item_1", label: "Item 1" },
+                  { key: "item_2", label: "Item 2" },
+                  { key: "item_3", label: "Item 3" },
+                  { key: "item_4", label: "Item 4" },
+                ]}
+                value={value}
+                onChange={onChange}
+              />
+            )}
+          />
           <Controller
             name="email"
             control={control}
