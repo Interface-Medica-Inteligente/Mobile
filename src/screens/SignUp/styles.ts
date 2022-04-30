@@ -5,7 +5,7 @@ interface ContainerProps {
 }
 
 export const Container = styled.ScrollView<ContainerProps>`
-  background-color: #fff;
+  background-color: #00CEC8;
   width: 100%;
   height: 100%;
   padding-top: 20px;
@@ -20,11 +20,13 @@ export const DimissisKeyboard = styled.Pressable`
   justify-content: center;
 `
 
-export const Wrapper = styled.KeyboardAvoidingView``
+export const Wrapper = styled.KeyboardAvoidingView`
+  background-color: #00CEC8;
+  height: 100%;
+`;
 
 export const Header = styled.View`
   display: flex;
-  background-color: #fff;
   width: 100%;
   align-items: center;
   justify-content: center;
@@ -43,6 +45,9 @@ export const RegisterAccount = styled.View`
   padding: 0 7.5%;
   flex: 1;
   align-self: center;
+  margin-top: 10%;
+  background-color: white;
+  border-top-left-radius: 53px;
 `
 
 interface AuthInputProps {
@@ -121,3 +126,45 @@ export const SignInButtonText = styled.Text`
   font-size: 16px;
   color: #4ecf72;
 `
+export const CreateAccountButton = styled.TouchableOpacity`
+  width: 100%;
+  height: 63px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const CreateAccountButtonText = styled.Text`
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+/* identical to box height */
+
+
+color: #00CEC8;
+  margin-left: 3px;
+`;
+
+export const Text = styled.Text`
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  color: #4ecf72;
+`;
+
+
+export const Title = styled.Text`
+  margin-top: 15%;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 38px;
+  text-align: center;
+
+  color: white;
+`;

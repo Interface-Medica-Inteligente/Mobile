@@ -1,16 +1,25 @@
 import React, { useState, useContext } from 'react'
 import { ActivityIndicator, Alert, Keyboard, Vibration } from 'react-native'
+import { useNavigation } from "@react-navigation/native"
+import { StackNavigationProp } from "@react-navigation/stack"
+import { RootStackParamList } from "../../stacks/MainStack"
 
 import {
   Wrapper,
   DimissisKeyboard,
   RegisterAccount,
   AuthInput,
-  RegisterButton,
-  RegisterButtonText,
-  Error,
-  Container,
+  CreateAccountButton,
+  CreateAccountButtonText,
+  Text,
+  Title,
 } from './styles'
+
+import { Input } from "../../components/Input";
+import { ButtonLarge } from "../../components/ButtonLarge";
+import { Controller, useForm } from "react-hook-form";
+
+type registerScreenProp = StackNavigationProp<RootStackParamList, "SignUp">;
 
 const SignUp = () => {
   const [name, setName] = useState('')
@@ -22,6 +31,9 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [confirmPasswordError, setConfirmPasswordError] = useState('')
   const [loading, setLoading] = useState(false)
+
+
+  const navigation = useNavigation<registerScreenProp>();
 
   const validData = () => {
     setNameError('')
@@ -56,53 +68,102 @@ const SignUp = () => {
     return true
   }
 
+  
+  const { control, handleSubmit } = useForm();
+
+  const onSubmit = (data) => console.log(data);
 
   return (
-    <Container>
       <Wrapper>
+        <Title>Login</Title>
         <DimissisKeyboard onPress={Keyboard.dismiss}>
           <RegisterAccount>
-            <AuthInput
-              invalid={nameError !== ''}
-              placeholder="Nome"
-              value={name}
-              onChangeText={(text) => setName(text)}
-            />
-            <Error>{nameError}</Error>
-            <AuthInput
-              invalid={emailError !== ''}
-              placeholder="Email"
-              value={email}
-              onChangeText={(text) => setEmail(text)}
-            />
-            <Error>{emailError}</Error>
-            <AuthInput
-              invalid={passwordError !== ''}
-              placeholder="Senha"
-              secureTextEntry
-              value={password}
-              onChangeText={(text) => setPassword(text)}
-            />
-            <Error>{passwordError}</Error>
-            <AuthInput
-              invalid={confirmPasswordError !== ''}
-              placeholder="Confirmar senha"
-              secureTextEntry
-              value={confirmPassword}
-              onChangeText={(text) => setConfirmPassword(text)}
-            />
-            <Error>{confirmPasswordError}</Error>
-            <RegisterButton onPress={() => {}} disabled={loading}>
-              {loading ? (
-                <ActivityIndicator color="#fff" size="large" />
-              ) : (
-                <RegisterButtonText>Vamos lá</RegisterButtonText>
-              )}
-            </RegisterButton>
+          <Controller
+            name="nome"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <Input
+                placeholder="Nome"
+                autoCompleteType="name"
+                autoCapitalize="none"
+                keyboardType="default"
+                autoCorrect={false}
+                value={value}
+                onChangeText={onChange}
+                style={{ marginTop: "30%"}}
+              />
+            )}
+          />
+          <Controller
+            name="cpf"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <Input
+                placeholder="CPF"
+                autoCompleteType="cc-number"
+                autoCapitalize="none"
+                keyboardType="numeric"
+                autoCorrect={false}
+                value={value}
+                onChangeText={onChange}
+              />
+            )}
+          />
+          <Controller
+            name="crm"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <Input
+                placeholder="CRM"
+                autoCompleteType="cc-number"
+                autoCapitalize="none"
+                keyboardType="numeric"
+                autoCorrect={false}
+                value={value}
+                onChangeText={onChange}
+              />
+            )}
+          />
+           <Controller
+            name="email"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <Input
+                placeholder="E-mail"
+                autoCompleteType="email"
+                autoCapitalize="none"
+                keyboardType="email-address"
+                autoCorrect={false}
+                value={value}
+                onChangeText={onChange}
+              />
+            )}
+          />
+          <Controller
+            name="password"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <Input
+                secureTextEntry
+                placeholder="Senha"
+                autoCorrect={false}
+                autoCapitalize="none"
+                autoCompleteType="password"
+                value={value}
+                onChangeText={onChange}
+                style={{ marginBottom: "8%"}}
+              />
+            )}
+          />
+            <ButtonLarge onPress={handleSubmit(onSubmit)} disabled={loading} text="Cadastrar" style={{ height: "5%"}}>
+            </ButtonLarge>
+            <CreateAccountButton onPress={() => navigation.navigate("SignIn")}>
+            <Text>Já tem conta?</Text>
+            <CreateAccountButtonText>Login</CreateAccountButtonText>
+            </CreateAccountButton>
           </RegisterAccount>
         </DimissisKeyboard>
       </Wrapper>
-    </Container>
   )
 }
 

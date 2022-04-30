@@ -17,7 +17,7 @@ export const Text = styled.Text`
   font-style: normal;
   font-weight: 400;
   font-size: 24px;
-  line-height: 35px;
+  line-height: 33px;
   /* identical to box height */
 
   text-align: center;

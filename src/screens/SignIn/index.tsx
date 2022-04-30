@@ -29,13 +29,8 @@ import {
 import { Input } from "../../components/Input";
 import { ButtonLarge } from "../../components/ButtonLarge";
 import { Controller, useForm } from "react-hook-form";
-<<<<<<< HEAD
 import LogoType from "../../components/LogoType";
- 
-=======
-import { Select } from "../../components/Select";
 
->>>>>>> 372286b07ea1dc17db8016e0bb01f4a7aad4650e
 type loginScreenProp = StackNavigationProp<RootStackParamList, "SignIn">;
 
 const SignIn = () => {
@@ -84,22 +79,6 @@ const SignIn = () => {
       <LogoType />
         <Authentication>
         <Title>Login</Title>
-          <Controller
-            name="genre"
-            control={control}
-            render={({ field: { value, onChange } }) => (
-              <Select
-                data={[
-                  { key: "item_1", label: "Item 1" },
-                  { key: "item_2", label: "Item 2" },
-                  { key: "item_3", label: "Item 3" },
-                  { key: "item_4", label: "Item 4" },
-                ]}
-                value={value}
-                onChange={onChange}
-              />
-            )}
-          />
           <Controller
             name="email"
             control={control}
