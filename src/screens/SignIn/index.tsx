@@ -71,7 +71,7 @@ const SignIn = () => {
 
   const { control, handleSubmit } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data: any) => console.log("Mostrar dados usuário ", data);
 
   return (
     <Wrapper>

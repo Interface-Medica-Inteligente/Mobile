@@ -75,7 +75,7 @@ const SignUp = () => {
 
   return (
       <Wrapper>
-        <Title>Login</Title>
+        <Title>Cadastro</Title>
         <DimissisKeyboard onPress={Keyboard.dismiss}>
           <RegisterAccount>
           <Controller
