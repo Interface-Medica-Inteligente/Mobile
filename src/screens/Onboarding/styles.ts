@@ -1,8 +1,8 @@
-import styled from 'styled-components/native'
+import styled from "styled-components/native";
 
 export const SafeArea = styled.SafeAreaView`
   background-color: white;
-`
+`;
 
 export const Container = styled.SafeAreaView`
   background-color: white;
@@ -11,7 +11,7 @@ export const Container = styled.SafeAreaView`
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-`
+`;
 
 export const PaginationButton = styled.TouchableOpacity`
   width: 311px;
@@ -22,4 +22,4 @@ export const PaginationButton = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   margin-bottom: 45px;
-`
+`;

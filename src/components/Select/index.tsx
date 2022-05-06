@@ -1,6 +1,7 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { Text } from "react-native";
+import React, { useState } from "react";
+import { LayoutAnimation } from "react-native";
 import {
+  Container,
   Icon,
   ItemContainer,
   ItemTitle,
@@ -12,40 +13,56 @@ import {
 const chevronDown = require("../../assets/chevron-down.png");
 const chevronUp = require("../../assets/chevron-up.png");
 
-const Select = ({ data = [], value, onChange }) => {
+type Item = { key: string; label: any };
+interface Props {
+  data: Item[];
+  value: Item;
+  placeholder?: string;
+  onChange: (item: Item) => void;
+}
+
+const Select = ({ data = [], value, onChange, placeholder }: Props) => {
   const [opened, setOpened] = useState(false);
 
   const handleOpenClose = () => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     setOpened(!opened);
   };
 
-  const currentKey = data.find((item) => item.key === value);
+  const currentKey = data.find((item) => item.key === value?.key);
 
   return (
-    <>
+    <Container>
       <SelectContainer onPress={handleOpenClose} selected={!!value || opened}>
         <SelectedText selected={!!value}>
-          {currentKey ? currentKey.label : "Select"}
+          {currentKey ? currentKey.label : placeholder || "Select"}
         </SelectedText>
-        <Icon source={opened ? chevronDown : chevronUp} />
+        <Icon source={!opened ? chevronDown : chevronUp} />
       </SelectContainer>
       {opened && (
         <ModalContainer>
           {data.map((item) => {
             const onPress = () => {
-              onChange(item.key);
+              LayoutAnimation.configureNext(
+                LayoutAnimation.Presets.easeInEaseOut
+              );
+              onChange(item);
               setOpened(false);
             };
 
             return (
-              <ItemContainer key={item.key} onPress={onPress}>
+              <ItemContainer
+                key={item.key}
+                onPress={onPress}
+                selected={item.key === value.key}
+              >
                 <ItemTitle>{item.label}</ItemTitle>
               </ItemContainer>
             );
           })}
         </ModalContainer>
       )}
-    </>
+    </Container>
   );
 };
 

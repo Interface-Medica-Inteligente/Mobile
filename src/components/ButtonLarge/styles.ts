@@ -8,12 +8,11 @@ export const Button = styled.TouchableOpacity`
   margin: 20px 0px;
   background-color: ${({ bgColor }) => bgColor};
   border-radius: 10px;
-  color: #FFF;
+  color: #fff;
   border-radius: 73px;
 `;
 
 export const Text = styled.Text`
-  font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
   font-size: 24px;
@@ -22,5 +21,5 @@ export const Text = styled.Text`
 
   text-align: center;
 
-  color: #FFFFFF;
+  color: #ffffff;
 `;
