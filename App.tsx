@@ -11,12 +11,9 @@ if (Platform.OS === "android") {
 }
 
 export default function App() {
-  const [initialPage, setInitialPage] =
-    useState<keyof RootStackParamList>("Onboarding");
-
   return (
     <NavigationContainer>
-      <MainStack initialPage={initialPage} />
+      <MainStack />
     </NavigationContainer>
   );
 }

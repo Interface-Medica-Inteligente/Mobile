@@ -71,7 +71,9 @@ const SignIn = () => {
 
   const { control, handleSubmit } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    navigation.navigate("Prontuario");
+  };
 
   return (
     <Wrapper>
