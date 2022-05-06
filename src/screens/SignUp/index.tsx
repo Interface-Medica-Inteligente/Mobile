@@ -69,13 +69,13 @@ const SignUp = () => {
 
   const { control, handleSubmit } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data: any) => console.log(data);
 
   return (
-    <Wrapper>
-      <Title>Login</Title>
-      <DimissisKeyboard onPress={Keyboard.dismiss}>
-        <RegisterAccount>
+      <Wrapper>
+        <Title>Cadastro</Title>
+        <DimissisKeyboard onPress={Keyboard.dismiss}>
+          <RegisterAccount>
           <Controller
             name="nome"
             control={control}

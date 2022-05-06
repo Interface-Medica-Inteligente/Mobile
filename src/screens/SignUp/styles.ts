@@ -144,7 +144,7 @@ export const CreateAccountButtonText = styled.Text`
 export const Text = styled.Text`
   font-style: normal;
   font-weight: normal;
-  font-size: 14px;
+  font-size: 16px;
   color: #4ecf72;
 `;
 
