@@ -12,7 +12,7 @@ export const Wrapper = styled.SafeAreaView`
   flex: 1;
   align-items: center;
   justify-content: center;
-  background-color: #00CEC8;
+  background-color: #00cec8;
   padding-top: 20%;
 `;
 
@@ -27,18 +27,16 @@ export const DimissisKeyboard = styled.Pressable`
 export const Title = styled.Text`
   margin-top: 15%;
   margin-bottom: 20%;
-  font-family: Roboto;
   font-style: normal;
   font-weight: 700;
   font-size: 32px;
   line-height: 38px;
   text-align: center;
 
-  color: #00CEC8;
+  color: #00cec8;
 `;
 
-export const Logo = styled.View`
-`;
+export const Logo = styled.View``;
 
 export const Authentication = styled.ScrollView`
   width: 100%;
@@ -46,9 +44,8 @@ export const Authentication = styled.ScrollView`
   padding: 0% 8%;
   flex: 1;
   align-self: center;
-  background-color: #FFF;
+  background-color: #fff;
   border-top-left-radius: 53px;
-
 `;
 
 interface AuthInputProps {
@@ -64,7 +61,6 @@ export const AuthInput = styled.TextInput<AuthInputProps>`
   color: #a1a4b2;
   border: ${(props: AuthInputProps) =>
     props.invalid ? "2px solid orange" : "0.15px solid #a1a4b2"};
-  font-family: Roboto;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -74,7 +70,6 @@ export const AuthInput = styled.TextInput<AuthInputProps>`
 export const Error = styled.Text`
   align-self: flex-start;
   margin-left: 15px;
-  font-family: Roboto;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
@@ -88,7 +83,6 @@ export const ForgotPassword = styled.TouchableOpacity`
 
 export const ForgotPasswordText = styled.Text`
   margin-top: 5px;
-  font-family: Roboto;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
@@ -107,7 +101,6 @@ export const LoginButton = styled.TouchableOpacity`
 `;
 
 export const LoginButtonText = styled.Text`
-  font-family: Roboto;
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
@@ -125,15 +118,13 @@ export const CreateAccountButton = styled.TouchableOpacity`
 `;
 
 export const CreateAccountButtonText = styled.Text`
-  font-family: Roboto;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
-/* identical to box height */
+  /* identical to box height */
 
-
-color: #00CEC8;
+  color: #00cec8;
   margin-left: 3px;
 `;
 
@@ -143,7 +134,6 @@ export const OtherAuthentications = styled.View`
 `;
 
 export const Text = styled.Text`
-  font-family: Roboto;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;

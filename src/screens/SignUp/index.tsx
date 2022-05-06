@@ -1,8 +1,8 @@
-import React, { useState, useContext } from 'react'
-import { ActivityIndicator, Alert, Keyboard, Vibration } from 'react-native'
-import { useNavigation } from "@react-navigation/native"
-import { StackNavigationProp } from "@react-navigation/stack"
-import { RootStackParamList } from "../../stacks/MainStack"
+import React, { useState, useContext } from "react";
+import { ActivityIndicator, Alert, Keyboard, Vibration } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../../stacks/MainStack";
 
 import {
   Wrapper,
@@ -13,7 +13,7 @@ import {
   CreateAccountButtonText,
   Text,
   Title,
-} from './styles'
+} from "./styles";
 
 import { Input } from "../../components/Input";
 import { ButtonLarge } from "../../components/ButtonLarge";
@@ -22,56 +22,54 @@ import { Controller, useForm } from "react-hook-form";
 type registerScreenProp = StackNavigationProp<RootStackParamList, "SignUp">;
 
 const SignUp = () => {
-  const [name, setName] = useState('')
-  const [nameError, setNameError] = useState('')
-  const [email, setEmail] = useState('')
-  const [emailError, setEmailError] = useState('')
-  const [password, setPassword] = useState('')
-  const [passwordError, setPasswordError] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
-  const [confirmPasswordError, setConfirmPasswordError] = useState('')
-  const [loading, setLoading] = useState(false)
-
+  const [name, setName] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigation = useNavigation<registerScreenProp>();
 
   const validData = () => {
-    setNameError('')
-    setEmailError('')
-    setPasswordError('')
-    setConfirmPasswordError('')
+    setNameError("");
+    setEmailError("");
+    setPasswordError("");
+    setConfirmPasswordError("");
 
     if (name.length < 3) {
-      Vibration.vibrate()
-      setNameError('Nome inválido')
-      return false
+      Vibration.vibrate();
+      setNameError("Nome inválido");
+      return false;
     }
     if (
       !email.match(
         /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
       )
     ) {
-      Vibration.vibrate()
-      setEmailError('Email inválido')
-      return false
+      Vibration.vibrate();
+      setEmailError("Email inválido");
+      return false;
     }
     if (password.length < 6) {
-      Vibration.vibrate()
-      setPasswordError('Senha muito curta')
-      return false
+      Vibration.vibrate();
+      setPasswordError("Senha muito curta");
+      return false;
     }
     if (password !== confirmPassword) {
-      Vibration.vibrate()
-      setConfirmPasswordError('Senhas não conferem')
-      return false
+      Vibration.vibrate();
+      setConfirmPasswordError("Senhas não conferem");
+      return false;
     }
-    return true
-  }
+    return true;
+  };
 
-  
   const { control, handleSubmit } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data: any) => console.log(data);
 
   return (
       <Wrapper>
@@ -90,7 +88,7 @@ const SignUp = () => {
                 autoCorrect={false}
                 value={value}
                 onChangeText={onChange}
-                style={{ marginTop: "30%"}}
+                style={{ marginTop: "30%" }}
               />
             )}
           />
@@ -124,7 +122,7 @@ const SignUp = () => {
               />
             )}
           />
-           <Controller
+          <Controller
             name="email"
             control={control}
             render={({ field: { value, onChange } }) => (
@@ -151,20 +149,24 @@ const SignUp = () => {
                 autoCompleteType="password"
                 value={value}
                 onChangeText={onChange}
-                style={{ marginBottom: "8%"}}
+                style={{ marginBottom: "8%" }}
               />
             )}
           />
-            <ButtonLarge onPress={handleSubmit(onSubmit)} disabled={loading} text="Cadastrar" style={{ height: "5%"}}>
-            </ButtonLarge>
-            <CreateAccountButton onPress={() => navigation.navigate("SignIn")}>
+          <ButtonLarge
+            onPress={handleSubmit(onSubmit)}
+            disabled={loading}
+            text="Cadastrar"
+            style={{ height: "5%" }}
+          ></ButtonLarge>
+          <CreateAccountButton onPress={() => navigation.navigate("SignIn")}>
             <Text>Já tem conta?</Text>
             <CreateAccountButtonText>Login</CreateAccountButtonText>
-            </CreateAccountButton>
-          </RegisterAccount>
-        </DimissisKeyboard>
-      </Wrapper>
-  )
-}
+          </CreateAccountButton>
+        </RegisterAccount>
+      </DimissisKeyboard>
+    </Wrapper>
+  );
+};
 
-export default SignUp
+export default SignUp;

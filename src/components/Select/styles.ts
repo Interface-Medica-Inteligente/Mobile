@@ -1,6 +1,10 @@
 import styled from "styled-components/native";
 
-export const SelectContainer = styled.TouchableOpacity`
+export const Container = styled.View`
+  z-index: 99;
+`;
+
+export const SelectContainer = styled.TouchableOpacity<{ selected: boolean }>`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -13,13 +17,12 @@ export const SelectContainer = styled.TouchableOpacity`
   border-radius: 10px;
 `;
 
-export const SelectedText = styled.Text`
+export const SelectedText = styled.Text<{ selected: boolean }>`
   height: 16px;
   color: ${({ selected }) => (!selected ? "#828282" : "#000")};
 `;
 
 export const ModalContainer = styled.View`
-  z-index: 99;
   position: absolute;
   padding: 12px;
   background-color: #fff;
@@ -30,8 +33,11 @@ export const ModalContainer = styled.View`
   width: 100%;
 `;
 
-export const ItemContainer = styled.TouchableOpacity`
+export const ItemContainer = styled.TouchableOpacity<{ selected: boolean }>`
   padding: 20px;
+  background-color: ${({ selected }) =>
+    selected ? "rgba(0, 206, 200, 0.1)" : "transparent"};
+  border-radius: 10px;
 `;
 
 export const ItemTitle = styled.Text``;

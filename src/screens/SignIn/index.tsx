@@ -24,7 +24,7 @@ import {
   ForgotPasswordText,
   Error,
   Title,
-  Logo
+  Logo,
 } from "./styles";
 import { Input } from "../../components/Input";
 import { ButtonLarge } from "../../components/ButtonLarge";
@@ -71,14 +71,17 @@ const SignIn = () => {
 
   const { control, handleSubmit } = useForm();
 
-  const onSubmit = (data: any) => console.log("Mostrar dados usuário ", data);
+  const onSubmit = (data: any) => {
+    console.log(data)
+    navigation.navigate("Prontuario");
+  };
 
   return (
     <Wrapper>
       <DimissisKeyboard onPress={Keyboard.dismiss}>
-      <LogoType />
+        <LogoType />
         <Authentication>
-        <Title>Login</Title>
+          <Title>Login</Title>
           <Controller
             name="email"
             control={control}
@@ -87,7 +90,6 @@ const SignIn = () => {
                 placeholder="E-mail"
                 autoCompleteType="email"
                 autoCapitalize="none"
-                keyboardType="email-address"
                 autoCorrect={false}
                 value={value}
                 onChangeText={onChange}
@@ -113,7 +115,11 @@ const SignIn = () => {
           <ForgotPassword onPress={() => {}}>
             <ForgotPasswordText>Esqueceu a senha?</ForgotPasswordText>
           </ForgotPassword>
-          <ButtonLarge onPress={handleSubmit(onSubmit)} disabled={loading} text="Entrar">
+          <ButtonLarge
+            onPress={handleSubmit(onSubmit)}
+            disabled={loading}
+            text="Entrar"
+          >
             <LoginButtonText>Entrar</LoginButtonText>
           </ButtonLarge>
           <CreateAccountButton onPress={() => navigation.navigate("SignUp")}>
