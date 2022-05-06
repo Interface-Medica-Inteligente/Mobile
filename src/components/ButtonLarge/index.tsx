@@ -3,28 +3,13 @@ import { TextInputProps } from "react-native";
 import { ButtonProps } from "react-native-elements";
 import { Button, Text } from "./styles";
 
-type Props = ButtonProps & { cor?: boolean; text?: string };
+type Props = ButtonProps & { secondary?: boolean; text?: string };
 
-const ButtonLarge = ({ cor, text, ...rest }: Props) => {
-  const [isFocused, setIsFocused] = useState(false);
-  const [bgColor, setBgColor] = useState("#00CEC8");
-  const [textbutton, setTextButton] = useState(" ");
-
-  useEffect(() => {
-    if (cor) {
-      setBgColor("#142585");
-      return;
-    }
-    setBgColor("#00CEC8");
-
-    if (text !== "") {
-      setTextButton(text);
-    }
-  }, [cor, text]);
+const ButtonLarge = ({ secondary, text, ...rest }: Props) => {
 
   return (
-    <Button bgColor={bgColor} {...rest}>
-      <Text>{textbutton}</Text>
+    <Button {...rest} secondary={secondary}>
+      <Text>{text}</Text>
     </Button>
   );
 };

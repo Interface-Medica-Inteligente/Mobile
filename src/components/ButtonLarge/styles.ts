@@ -1,15 +1,19 @@
 import styled from "styled-components/native";
 
 export const Button = styled.TouchableOpacity`
-  width: 70.594436310395317%;
-  height: 9.44%;
+  width: 70%;
+  height: 52px;
   align-self: center;
-  padding: 10px;
+  padding: 6px;
   margin: 20px 0px;
-  background-color: ${({ bgColor }) => bgColor};
-  border-radius: 10px;
+  background-color:${({ secondary }) => {
+    if (secondary) {
+      return  "#142585";
+    }
+    return "#00CEC8";
+  }};
+  border-radius: 26px;
   color: #fff;
-  border-radius: 73px;
 `;
 
 export const Text = styled.Text`
