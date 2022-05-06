@@ -14,10 +14,8 @@ if (Platform.OS === "android") {
 
 export default function App() {
   return (
-    <Provider store={store}>
       <NavigationContainer>
         <MainStack />
       </NavigationContainer>
-    </Provider>
   );
 }

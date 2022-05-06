@@ -5,7 +5,7 @@ export const Wrapper = styled.SafeAreaView`
   align-items: center;
   justify-content: center;
   background-color: #fff;
-  padding-top: 20%;
+  padding-top: 15%;
 `
 
 export const DimissisKeyboard = styled.Pressable`
@@ -33,3 +33,13 @@ export const PaginationButton = styled.TouchableOpacity`
   align-items: center;
   margin-bottom: 45px;
 `
+
+export const MetricsPacient = styled.View`
+  display: flex;
+  flex-direction: row;
+`;
+
+export const Buttons = styled.View`
+  display: flex;
+  flex-direction: row;
+`;

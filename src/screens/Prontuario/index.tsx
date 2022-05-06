@@ -10,6 +10,8 @@ import {
   DimissisKeyboard,
   PaginationButton,
   LoginButtonText,
+  MetricsPacient,
+  Buttons
 } from "./styles";
 import { Input } from "../../components/Input";
 import { ButtonSmall } from "../../components/ButtonSmall";
@@ -59,6 +61,7 @@ const Prontuario = () => {
               />
             )}
           />
+          <MetricsPacient>
           <Controller
             name="altura"
             control={control}
@@ -71,7 +74,7 @@ const Prontuario = () => {
                 autoCorrect={false}
                 value={value}
                 onChangeText={onChange}
-                style={{ width: "40%" }}
+                style={{ width: "45%", marginRight: "10%" }}
               />
             )}
           />
@@ -87,10 +90,11 @@ const Prontuario = () => {
                 autoCorrect={false}
                 value={value}
                 onChangeText={onChange}
-                style={{ width: "40%" }}
+                style={{ width: "45%" }}
               />
             )}
           />
+          </MetricsPacient>
           <Controller
             name="cpf"
             control={control}
@@ -149,8 +153,10 @@ const Prontuario = () => {
               />
             )}
           />
-          <ButtonLarge text="Buscar Prontuário" cor={true} />
-          <ButtonSmall />
+          <Buttons>
+            <ButtonLarge text="Buscar Prontuário" secondary  style={{ marginRight: "8%" }}/>
+            <ButtonSmall onPress={() => { navigation.navigate("Receita") }} />
+          </Buttons>
         </Authentication>
       </DimissisKeyboard>
     </Wrapper>

@@ -19,7 +19,7 @@ export const Button = styled.TouchableOpacity`
 export const Text = styled.Text`
   font-style: normal;
   font-weight: 400;
-  font-size: 24px;
+  font-size: 20px;
   line-height: 33px;
   /* identical to box height */
 
