@@ -24,18 +24,14 @@ import {
   ForgotPasswordText,
   Error,
   Title,
-  Logo
+  Logo,
 } from "./styles";
 import { Input } from "../../components/Input";
 import { ButtonLarge } from "../../components/ButtonLarge";
 import { Controller, useForm } from "react-hook-form";
-<<<<<<< HEAD
-import LogoType from "../../components/LogoType";
- 
-=======
-import { Select } from "../../components/Select";
 
->>>>>>> 372286b07ea1dc17db8016e0bb01f4a7aad4650e
+import LogoType from "../../components/LogoType";
+
 type loginScreenProp = StackNavigationProp<RootStackParamList, "SignIn">;
 
 const SignIn = () => {
@@ -76,30 +72,16 @@ const SignIn = () => {
 
   const { control, handleSubmit } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    navigation.navigate("Prontuario");
+  };
 
   return (
     <Wrapper>
       <DimissisKeyboard onPress={Keyboard.dismiss}>
-      <LogoType />
+        <LogoType />
         <Authentication>
-        <Title>Login</Title>
-          <Controller
-            name="genre"
-            control={control}
-            render={({ field: { value, onChange } }) => (
-              <Select
-                data={[
-                  { key: "item_1", label: "Item 1" },
-                  { key: "item_2", label: "Item 2" },
-                  { key: "item_3", label: "Item 3" },
-                  { key: "item_4", label: "Item 4" },
-                ]}
-                value={value}
-                onChange={onChange}
-              />
-            )}
-          />
+          <Title>Login</Title>
           <Controller
             name="email"
             control={control}
@@ -134,7 +116,11 @@ const SignIn = () => {
           <ForgotPassword onPress={() => {}}>
             <ForgotPasswordText>Esqueceu a senha?</ForgotPasswordText>
           </ForgotPassword>
-          <ButtonLarge onPress={handleSubmit(onSubmit)} disabled={loading} text="Entrar">
+          <ButtonLarge
+            onPress={handleSubmit(onSubmit)}
+            disabled={loading}
+            text="Entrar"
+          >
             <LoginButtonText>Entrar</LoginButtonText>
           </ButtonLarge>
           <CreateAccountButton onPress={() => navigation.navigate("SignUp")}>

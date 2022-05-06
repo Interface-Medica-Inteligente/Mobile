@@ -4,12 +4,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import MainStack, { RootStackParamList } from "./src/stacks/MainStack";
 
 export default function App() {
-  const [initialPage, setInitialPage] =
-    useState<keyof RootStackParamList>("Onboarding");
-
   return (
     <NavigationContainer>
-      <MainStack initialPage={initialPage} />
+      <MainStack />
     </NavigationContainer>
   );
 }
