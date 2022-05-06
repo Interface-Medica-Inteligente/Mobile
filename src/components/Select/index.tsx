@@ -54,7 +54,8 @@ const Select = ({ data = [], value, onChange, placeholder }: Props) => {
               <ItemContainer
                 key={item.key}
                 onPress={onPress}
-                selected={item.key === value.key}
+                disabled={item.key === value?.key}
+                selected={item.key === value?.key}
               >
                 <ItemTitle>{item.label}</ItemTitle>
               </ItemContainer>
