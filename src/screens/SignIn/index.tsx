@@ -29,7 +29,6 @@ import {
 import { Input } from "../../components/Input";
 import { ButtonLarge } from "../../components/ButtonLarge";
 import { Controller, useForm } from "react-hook-form";
-
 import LogoType from "../../components/LogoType";
 
 type loginScreenProp = StackNavigationProp<RootStackParamList, "SignIn">;
@@ -90,7 +89,6 @@ const SignIn = () => {
                 placeholder="E-mail"
                 autoCompleteType="email"
                 autoCapitalize="none"
-                keyboardType="email-address"
                 autoCorrect={false}
                 value={value}
                 onChangeText={onChange}

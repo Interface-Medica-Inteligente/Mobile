@@ -61,7 +61,6 @@ export const AuthInput = styled.TextInput<AuthInputProps>`
   color: #a1a4b2;
   border: ${(props: AuthInputProps) =>
     props.invalid ? "2px solid orange" : "0.15px solid #a1a4b2"};
-
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -84,7 +83,6 @@ export const ForgotPassword = styled.TouchableOpacity`
 
 export const ForgotPasswordText = styled.Text`
   margin-top: 5px;
-
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
