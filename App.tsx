@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
 import MainStack, { RootStackParamList } from "./src/stacks/MainStack";
 import { Platform, UIManager } from "react-native";
-import store from './store'
+import store from './src/store'
 
 if (Platform.OS === "android") {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
