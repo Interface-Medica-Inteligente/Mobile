@@ -145,7 +145,7 @@ export const Text = styled.Text`
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
-  color: #4ecf72;
+  color: white;
 `;
 
 export const Title = styled.Text`
