@@ -6,6 +6,7 @@ import SignUp from "../screens/SignUp";
 import Prontuario from "../screens/Prontuario";
 import Receita from "../screens/Receita";
 import Home from "../screens/Home";
+import { Header } from "../components/Header";
 
 export type RootStackParamList = {
   Onboarding: undefined;
@@ -22,11 +23,26 @@ const MainStack = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: false,
+        header: () => <Header />,
+        cardStyle: {
+          backgroundColor: "#fff",
+        },
       }}
     >
-      <Stack.Screen name="SignIn" component={SignIn} />
-      <Stack.Screen name="SignUp" component={SignUp} />
+      <Stack.Screen
+        name="SignIn"
+        component={SignIn}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="SignUp"
+        component={SignUp}
+        options={{
+          headerShown: false,
+        }}
+      />
       <Stack.Screen name="Prontuario" component={Prontuario} />
       <Stack.Screen name="Receita" component={Receita} />
       <Stack.Screen name="Home" component={Home} />

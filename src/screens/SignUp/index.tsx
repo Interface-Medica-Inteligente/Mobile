@@ -157,7 +157,6 @@ const SignUp = () => {
             onPress={handleSubmit(onSubmit)}
             disabled={loading}
             text="Cadastrar"
-            style={{ height: "5%" }}
           ></ButtonLarge>
           <CreateAccountButton onPress={() => navigation.navigate("SignIn")}>
             <Text>Já tem conta?</Text>
