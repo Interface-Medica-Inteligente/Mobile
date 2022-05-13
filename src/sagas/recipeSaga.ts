@@ -4,11 +4,11 @@ import { all, call, put, select, takeLatest } from "redux-saga/effects";
 import { Actions as RecipeActions } from "../reducers/recipe";
 
 import Api from "../services/api";
-import { transformRecipes } from "../../../Front-End/src/transforms";
+import { transformRecipes } from "../transforms";
 import attendanceSelector from "../selectors/attendanceSelector";
-import { downloadPDF } from "../../../Front-End/src/utils";
+import { downloadPDF } from "../utils";
 
-function* requestRegisterRecipe(action): Saga<*> {
+function* requestRegisterRecipe(action: any) {
   const { payload } = action;
   const attendanceId = yield select(attendanceSelector.getAttendanceId);
   const response = yield call(Api.registerRecipe, { attendanceId, ...payload });
@@ -22,7 +22,7 @@ function* requestRegisterRecipe(action): Saga<*> {
   alert("Cadastrado!");
 }
 
-function* requestFilterRecipe(action): Saga<*> {
+function* requestFilterRecipe(action: any) {
   const { payload } = action;
   const attendanceId = yield select(attendanceSelector.getAttendanceId);
   const response = yield call(Api.searchRecipe, { attendanceId, ...payload });
@@ -37,7 +37,7 @@ function* requestFilterRecipe(action): Saga<*> {
   yield put(RecipeActions.entities.setRecipes(transformedData));
 }
 
-function* requestRecipes(): Saga<*> {
+function* requestRecipes() {
   const attendanceId = yield select(attendanceSelector.getAttendanceId);
   if (attendanceId) {
     const response = yield call(Api.getRecipes, { attendanceId });
@@ -52,14 +52,14 @@ function* requestRecipes(): Saga<*> {
   }
 }
 
-function* requestPDFRecipe(action): Saga<*> {
+function* requestPDFRecipe(action: any) {
   const { payload } = action;
   const response = yield call(Api.getRecipePDF, payload);
 
   downloadPDF(response.data, "receita");
 }
 
-export default function* sagas(): Saga<*> {
+export default function* sagas() {
   yield all([
     takeLatest(RecipeActions.ui.requestFilterRecipe, requestFilterRecipe),
     takeLatest(RecipeActions.ui.requestRecipes, requestRecipes),

@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { ActivityIndicator, Alert, Keyboard, Vibration } from "react-native";
-// import { useDispatch } from 'react-redux';
-// import { Actions as DoctorActions } from '../../reducers/doctor';
+import { useDispatch } from 'react-redux';
+import { Actions as DoctorActions } from '../../reducers/doctor';
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../stacks/MainStack";
@@ -33,7 +33,7 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [loading, setLoading] = useState(false);
-  //const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
   const navigation = useNavigation<registerScreenProp>();
 
@@ -73,7 +73,8 @@ const SignUp = () => {
   const { control, handleSubmit } = useForm();
 
   const onSubmit = data => {
-    //dispatch(DoctorActions.ui.requestRegister(data));
+    dispatch(DoctorActions.ui.requestRegister(data));
+    console.log("Dados passados: \n", data);
     navigation.navigate("SignIn");
   }
 

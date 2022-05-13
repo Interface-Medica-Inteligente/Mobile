@@ -14,8 +14,12 @@ if (Platform.OS === "android") {
 
 export default function App() {
   return (
-      <NavigationContainer>
-        <MainStack />
-      </NavigationContainer>
+    <React.StrictMode>
+      <Provider store={store}>
+        <NavigationContainer>
+          <MainStack />
+        </NavigationContainer>
+      </Provider>
+    </React.StrictMode>
   );
 }

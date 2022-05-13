@@ -9,7 +9,7 @@ import Api from '../services/api'
 import { transformRecord } from '../transforms'
 import doctorSelector from '../selectors/doctorSelector'
 
-function * requestRegisterRecord (action): Saga<*> {
+function * requestRegisterRecord (action: any) {
   const { payload } = action
   const doctorId = yield select(doctorSelector.getDoctorId)
   const response = yield call(Api.registerRecord, { doctorId, ...payload })
@@ -24,7 +24,7 @@ function * requestRegisterRecord (action): Saga<*> {
   yield put(AttendanceActions.entities.setAttendanceId(response.data))
 }
 
-function * requestSearchRecord (action): Saga<*> {
+function * requestSearchRecord (action: any) {
   const { payload } = action
   const response = yield call(Api.searchRecord, payload)
 
@@ -38,7 +38,7 @@ function * requestSearchRecord (action): Saga<*> {
   yield put(DialogActions.ui.closeDialog())
 }
 
-export default function * sagas (): Saga<*> {
+export default function * sagas () {
   yield all([
     takeLatest(RecordActions.ui.requestSearchRecord, requestSearchRecord),
     takeLatest(RecordActions.ui.requestRegisterRecord, requestRegisterRecord)

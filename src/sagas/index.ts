@@ -8,7 +8,7 @@ import reportSaga from './reportSaga'
 
 import type { Saga } from 'redux-saga'
 
-export default function * root (): Saga<*> {
+export default function * root () {
   yield all([
     doctorSaga(),
     recordSaga(),

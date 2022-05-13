@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext, createRef } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { useDispatch } from 'react-redux'
+import { Actions as DoctorActions } from '../../reducers/doctor'
 import {
   ActivityIndicator,
   Alert,
@@ -42,6 +44,7 @@ const SignIn = () => {
   const emailInput = createRef<TextInput>();
   const passwordInput = createRef<TextInput>();
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch()
 
   const navigation = useNavigation<loginScreenProp>();
 
@@ -73,6 +76,7 @@ const SignIn = () => {
 
   const onSubmit = (data: any) => {
     console.log("dados dos inputs",data)
+    dispatch(DoctorActions.ui.requestLogin(data))
     navigation.navigate("Prontuario");
   };
 

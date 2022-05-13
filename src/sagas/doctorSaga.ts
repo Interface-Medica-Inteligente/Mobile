@@ -4,7 +4,7 @@ import { all, call, put, takeLatest } from 'redux-saga/effects'
 import { Actions } from '../reducers/doctor'
 import Api from '../services/api'
 
-function * requestLogin (action): Saga<*> {
+function * requestLogin (action: any) {
   const { payload } = action
   const response = yield call(Api.login, payload)
 
@@ -15,7 +15,7 @@ function * requestLogin (action): Saga<*> {
   yield put(Actions.entities.setDoctor({ id: response.data }))
 }
 
-function * requestRegister (action): Saga<*> {
+function * requestRegister (action: any) {
   const { payload } = action
   const response = yield call(Api.register, payload)
 
@@ -26,7 +26,7 @@ function * requestRegister (action): Saga<*> {
   yield put(Actions.entities.setDoctor({ id: response.data }))
 }
 
-export default function * sagas (): Saga<*> {
+export default function * sagas () {
   yield all([
     takeLatest(Actions.ui.requestLogin, requestLogin),
     takeLatest(Actions.ui.requestRegister, requestRegister)
