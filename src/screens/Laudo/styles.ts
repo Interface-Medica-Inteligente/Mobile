@@ -5,7 +5,7 @@ export const Wrapper = styled.SafeAreaView`
   align-items: center;
   justify-content: center;
   background-color: #fff;
-  padding-top: 20%;
+  padding-top: 15%;
 `
 
 export const DimissisKeyboard = styled.Pressable`
@@ -18,7 +18,7 @@ export const DimissisKeyboard = styled.Pressable`
 
 export const Authentication = styled.ScrollView`
   width: 85%;
-  margin-top: 10%;
+  margin-top: 15%;
   flex: 1;
   align-self: center;
 `
@@ -34,25 +34,15 @@ export const PaginationButton = styled.TouchableOpacity`
   margin-bottom: 45px;
 `
 
-export const LoginButtonText = styled.Text`
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: bold;
-  font-size: 16px;
-  color: #ffffff;
-`
-
-export const MetricsAplications = styled.View`
+export const MetricsPacient = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-`
+`;
 
 export const Buttons = styled.View`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: -30px;
-`
+  justify-content: flex-end;
+`;

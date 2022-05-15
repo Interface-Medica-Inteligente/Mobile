@@ -9,7 +9,9 @@ import {
     Authentication,
     DimissisKeyboard,
     PaginationButton,
-    LoginButtonText
+    LoginButtonText,
+    MetricsAplications,
+    Buttons
   } from "./styles"
 import { Input } from "../../components/Input"
 import { ButtonSmall } from "../../components/ButtonSmall"
@@ -56,6 +58,7 @@ const Receita = () => {
               />
             )}
           />
+          <MetricsAplications>
           <Controller
             name="quantidade"
             control={control}
@@ -68,7 +71,7 @@ const Receita = () => {
               autoCorrect={false}
               value={value}
               onChangeText={onChange}
-              style={{width: '40%'}}
+              style={{width: '48%'}}
               />
               )}
           />
@@ -84,10 +87,11 @@ const Receita = () => {
               autoCorrect={false}
               value={value}
               onChangeText={onChange}
-              style={{width: '40%'}}
+              style={{width: '48%'}}
               />
               )}
               />
+          </MetricsAplications>
           <Controller
             name="descricao"
             control={control}
@@ -105,9 +109,11 @@ const Receita = () => {
           <ButtonLarge text="Gerar PDF">
               <LoginButtonText>Gerar PDF</LoginButtonText>
           </ButtonLarge>
-          <ButtonLarge text="Buscar Receita" cor={true}>
-          </ButtonLarge>
-          <ButtonSmall/>
+          <Buttons>
+            <ButtonLarge text="Buscar Receita" secondary>
+            </ButtonLarge>
+            <ButtonSmall/>
+          </Buttons>
         </Authentication>
       </DimissisKeyboard>
     </Wrapper>
