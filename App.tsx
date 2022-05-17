@@ -4,7 +4,9 @@ import { Provider } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
 import MainStack, { RootStackParamList } from "./src/stacks/MainStack";
 import { Platform, UIManager } from "react-native";
-import store from './src/store'
+import { navigationRef } from "./src/services/navigationService";
+
+import store from "./src/store";
 
 if (Platform.OS === "android") {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -16,7 +18,7 @@ export default function App() {
   return (
     <React.StrictMode>
       <Provider store={store}>
-        <NavigationContainer>
+        <NavigationContainer ref={navigationRef}>
           <MainStack />
         </NavigationContainer>
       </Provider>

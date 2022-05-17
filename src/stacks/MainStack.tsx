@@ -8,6 +8,8 @@ import Receita from "../screens/Receita";
 import Laudo from "../screens/Laudo";
 import Home from "../screens/Home";
 import { Header } from "../components/Header";
+import { useSelector } from "react-redux";
+import doctorSelector from "../selectors/doctorSelector";
 
 export type RootStackParamList = {
   Onboarding: undefined;
@@ -16,14 +18,16 @@ export type RootStackParamList = {
   Home: undefined;
   Prontuario: undefined;
   Receita: undefined;
-  Laudo: undefined
+  Laudo: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
 
 const MainStack = () => {
+  const isLogged = useSelector(doctorSelector.isLogged);
   return (
     <Stack.Navigator
+      initialRouteName="Prontuario"
       screenOptions={{
         header: () => <Header />,
         cardStyle: {
@@ -45,10 +49,10 @@ const MainStack = () => {
           headerShown: false,
         }}
       />
-      <Stack.Screen name="Prontuario" component={Prontuario} />
-      <Stack.Screen name="Receita" component={Receita} />
-      <Stack.Screen name="Laudo" component={Laudo} />
-      <Stack.Screen name="Home" component={Home} />
+      {isLogged && <Stack.Screen name="Prontuario" component={Prontuario} />}
+      {isLogged && <Stack.Screen name="Receita" component={Receita} />}
+      {isLogged && <Stack.Screen name="Laudo" component={Laudo} />}
+      {isLogged && <Stack.Screen name="Home" component={Home} />}
     </Stack.Navigator>
   );
 };
