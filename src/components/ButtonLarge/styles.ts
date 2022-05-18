@@ -1,14 +1,22 @@
 import styled from "styled-components/native";
 
-export const Button = styled.TouchableOpacity`
+export const Button = styled.TouchableOpacity<{
+  secondary?: boolean;
+  loading?: boolean;
+}>`
   width: 70%;
   height: 52px;
   align-self: center;
+  align-items: center;
+  justify-content: center;
   padding: 6px;
   margin: 20px 0px;
-  background-color:${({ secondary }) => {
+  background-color: ${({ secondary, loading }) => {
+    if (loading) {
+      return "transparent";
+    }
     if (secondary) {
-      return  "#142585";
+      return "#142585";
     }
     return "#00CEC8";
   }};
@@ -19,11 +27,10 @@ export const Button = styled.TouchableOpacity`
 export const Text = styled.Text`
   font-style: normal;
   font-weight: 400;
-  font-size: 20px;
-  line-height: 33px;
-  /* identical to box height */
-
+  font-size: 18;
+  line-height: 22px;
   text-align: center;
-
   color: #ffffff;
 `;
+
+export const Indicator = styled.ActivityIndicator``;

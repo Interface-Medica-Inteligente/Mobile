@@ -1,12 +1,12 @@
-import React from "react"
-import { Button, Text } from "./styles"
+import React from "react";
+import { Button, Text } from "./styles";
 
-const ButtonSmall = ({...rest}) => {
+const ButtonSmall = ({ ...rest }) => {
   return (
-    <Button>
-      <Text>{'>'}</Text>
+    <Button {...rest}>
+      <Text>{">"}</Text>
     </Button>
-  )
-}
+  );
+};
 
-export { ButtonSmall }
+export { ButtonSmall };

@@ -1,11 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { TextInputProps } from "react-native";
-import { ButtonProps } from "react-native-elements";
-import { Button, Text } from "./styles";
+import React from "react";
+import { TouchableOpacityProps } from "react-native";
+import { Button, Indicator, Text } from "./styles";
 
-type Props = ButtonProps & { secondary?: boolean; text?: string };
+type Props = TouchableOpacityProps & {
+  secondary?: boolean;
+  text?: string;
+  loading?: boolean;
+};
 
-const ButtonLarge = ({ secondary, text, ...rest }: Props) => {
+const ButtonLarge = ({ secondary, text, loading, ...rest }: Props) => {
+  if (loading) {
+    return (
+      <Button disabled={loading} {...rest} loading={loading}>
+        <Indicator />
+      </Button>
+    );
+  }
 
   return (
     <Button {...rest} secondary={secondary}>

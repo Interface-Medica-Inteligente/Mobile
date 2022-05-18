@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { ActivityIndicator, Alert, Keyboard, Vibration } from "react-native";
-import { useDispatch } from 'react-redux';
-import { Actions as DoctorActions } from '../../reducers/doctor';
+import { useDispatch, useSelector } from "react-redux";
+import { Actions as DoctorActions } from "../../reducers/doctor";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../stacks/MainStack";
@@ -20,71 +20,29 @@ import {
 import { Input } from "../../components/Input";
 import { ButtonLarge } from "../../components/ButtonLarge";
 import { Controller, useForm } from "react-hook-form";
+import doctorSelector from "../../selectors/doctorSelector";
+import { RegisterData } from "../../entities";
 
 type registerScreenProp = StackNavigationProp<RootStackParamList, "SignUp">;
 
 const SignUp = () => {
-  const [name, setName] = useState("");
-  const [nameError, setNameError] = useState("");
-  const [email, setEmail] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [confirmPasswordError, setConfirmPasswordError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch()
-
+  const fetching = useSelector(doctorSelector.isFetching);
+  const dispatch = useDispatch();
   const navigation = useNavigation<registerScreenProp>();
 
-  const validData = () => {
-    setNameError("");
-    setEmailError("");
-    setPasswordError("");
-    setConfirmPasswordError("");
+  const { control, handleSubmit } = useForm<RegisterData>();
 
-    if (name.length < 3) {
-      Vibration.vibrate();
-      setNameError("Nome inválido");
-      return false;
-    }
-    if (
-      !email.match(
-        /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
-      )
-    ) {
-      Vibration.vibrate();
-      setEmailError("Email inválido");
-      return false;
-    }
-    if (password.length < 6) {
-      Vibration.vibrate();
-      setPasswordError("Senha muito curta");
-      return false;
-    }
-    if (password !== confirmPassword) {
-      Vibration.vibrate();
-      setConfirmPasswordError("Senhas não conferem");
-      return false;
-    }
-    return true;
+  const onSubmit = (data: RegisterData) => {
+    dispatch(DoctorActions.ui.requestRegister(data));
   };
 
-  const { control, handleSubmit } = useForm();
-
-  const onSubmit = data => {
-    dispatch(DoctorActions.ui.requestRegister(data));
-    console.log("Dados passados: \n", data);
-    navigation.navigate("SignIn");
-  }
-
   return (
-      <Wrapper>
-        <Title>Cadastro</Title>
-        <DimissisKeyboard onPress={Keyboard.dismiss}>
-          <RegisterAccount>
+    <Wrapper>
+      <Title>Cadastro</Title>
+      <DimissisKeyboard onPress={Keyboard.dismiss}>
+        <RegisterAccount>
           <Controller
-            name="nome"
+            name="name"
             control={control}
             render={({ field: { value, onChange } }) => (
               <Input
@@ -162,9 +120,9 @@ const SignUp = () => {
           />
           <ButtonLarge
             onPress={handleSubmit(onSubmit)}
-            disabled={loading}
+            loading={fetching}
             text="Cadastrar"
-          ></ButtonLarge>
+          />
           <CreateAccountButton onPress={() => navigation.navigate("SignIn")}>
             <Text>Já tem conta?</Text>
             <CreateAccountButtonText>Login</CreateAccountButtonText>

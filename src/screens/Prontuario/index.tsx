@@ -1,5 +1,4 @@
 import React from "react";
-import { View, Text, ImageSourcePropType } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../stacks/MainStack";
@@ -8,10 +7,8 @@ import {
   Wrapper,
   Authentication,
   DimissisKeyboard,
-  PaginationButton,
-  LoginButtonText,
   MetricsPacient,
-  Buttons
+  Buttons,
 } from "./styles";
 import { Input } from "../../components/Input";
 import { ButtonSmall } from "../../components/ButtonSmall";
@@ -62,38 +59,38 @@ const Prontuario = () => {
             )}
           />
           <MetricsPacient>
-          <Controller
-            name="altura"
-            control={control}
-            render={({ field: { value, onChange } }) => (
-              <Input
-                placeholder="Altura"
-                autoCompleteType="name"
-                autoCapitalize="none"
-                keyboardType="numeric"
-                autoCorrect={false}
-                value={value}
-                onChangeText={onChange}
-                style={{ width: "45%", marginRight: "10%" }}
-              />
-            )}
-          />
-          <Controller
-            name="peso"
-            control={control}
-            render={({ field: { value, onChange } }) => (
-              <Input
-                placeholder="Peso"
-                autoCompleteType="name"
-                autoCapitalize="none"
-                keyboardType="numeric"
-                autoCorrect={false}
-                value={value}
-                onChangeText={onChange}
-                style={{ width: "45%" }}
-              />
-            )}
-          />
+            <Controller
+              name="altura"
+              control={control}
+              render={({ field: { value, onChange } }) => (
+                <Input
+                  placeholder="Altura"
+                  autoCompleteType="name"
+                  autoCapitalize="none"
+                  keyboardType="numeric"
+                  autoCorrect={false}
+                  value={value}
+                  onChangeText={onChange}
+                  style={{ width: "45%", marginRight: "10%" }}
+                />
+              )}
+            />
+            <Controller
+              name="peso"
+              control={control}
+              render={({ field: { value, onChange } }) => (
+                <Input
+                  placeholder="Peso"
+                  autoCompleteType="name"
+                  autoCapitalize="none"
+                  keyboardType="numeric"
+                  autoCorrect={false}
+                  value={value}
+                  onChangeText={onChange}
+                  style={{ width: "45%" }}
+                />
+              )}
+            />
           </MetricsPacient>
           <Controller
             name="cpf"
@@ -154,8 +151,16 @@ const Prontuario = () => {
             )}
           />
           <Buttons>
-            <ButtonLarge text="Buscar Prontuário" secondary  style={{ marginRight: "8%" }}/>
-            <ButtonSmall onPress={() => { navigation.navigate("Receita") }} />
+            <ButtonLarge
+              text="Buscar Prontuário"
+              secondary
+              style={{ marginRight: "8%" }}
+            />
+            <ButtonSmall
+              onPress={() => {
+                navigation.navigate("Receita");
+              }}
+            />
           </Buttons>
         </Authentication>
       </DimissisKeyboard>

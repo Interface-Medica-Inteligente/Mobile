@@ -1,80 +1,37 @@
-import React, { useState, useEffect, useContext, createRef } from "react";
+import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Actions as DoctorActions } from "../../reducers/doctor";
-import {
-  ActivityIndicator,
-  Alert,
-  Keyboard,
-  TextInput,
-  Text,
-  Vibration,
-} from "react-native";
+import { Keyboard, Text } from "react-native";
 import { RootStackParamList } from "../../stacks/MainStack";
 
 import {
   Wrapper,
   Authentication,
-  AuthInput,
-  LoginButton,
   CreateAccountButton,
   DimissisKeyboard,
-  LoginButtonText,
   CreateAccountButtonText,
-  ForgotPassword,
-  ForgotPasswordText,
-  Error,
   Title,
-  Logo,
 } from "./styles";
 import { Input } from "../../components/Input";
 import { ButtonLarge } from "../../components/ButtonLarge";
 import { Controller, useForm } from "react-hook-form";
 import LogoType from "../../components/LogoType";
+import doctorSelector from "../../selectors/doctorSelector";
+import { LoginData } from "../../entities";
 
 type loginScreenProp = StackNavigationProp<RootStackParamList, "SignIn">;
 
 const SignIn = () => {
-  const [email, setEmail] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [signInError, setSignInError] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const emailInput = createRef<TextInput>();
-  const passwordInput = createRef<TextInput>();
-  const [loading, setLoading] = useState(false);
+  const fetching = useSelector(doctorSelector.isFetching);
   const dispatch = useDispatch();
 
   const navigation = useNavigation<loginScreenProp>();
 
-  const validData = (): boolean => {
-    setEmailError("");
-    setPasswordError("");
-    setSignInError("");
+  const { control, handleSubmit } = useForm<LoginData>();
 
-    if (
-      !email
-        .trim()
-        .match(
-          /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
-        )
-    ) {
-      Vibration.vibrate();
-      setEmailError("Email inválido");
-      return false;
-    }
-    if (password.length < 6) {
-      Vibration.vibrate();
-      setPasswordError("Senha muito curta");
-      return false;
-    }
-    return true;
-  };
-
-  const { control, handleSubmit } = useForm();
-
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: LoginData) => {
     dispatch(DoctorActions.ui.requestLogin(data));
   };
 
@@ -113,33 +70,16 @@ const SignIn = () => {
               />
             )}
           />
-
-          <ForgotPassword onPress={() => {}}>
-            <ForgotPasswordText>Esqueceu a senha?</ForgotPasswordText>
-          </ForgotPassword>
           <ButtonLarge
+            loading={fetching}
             onPress={handleSubmit(onSubmit)}
-            disabled={loading}
             text="Entrar"
-          >
-            <LoginButtonText>Entrar</LoginButtonText>
-          </ButtonLarge>
+          />
           <CreateAccountButton onPress={() => navigation.navigate("SignUp")}>
             <Text>Não tem conta?</Text>
             <CreateAccountButtonText>Cadastre-se</CreateAccountButtonText>
           </CreateAccountButton>
         </Authentication>
-        {/* <OtherAuthentications>
-          <Text>Acessar com</Text>
-          <ExternalAuthentications>
-            <OtherAuthentication>
-              <BrandLogo source={GoogleIcon} />
-            </OtherAuthentication>
-            <OtherAuthentication background="#7583C9">
-              <BrandLogo source={FacebookIcon} />
-            </OtherAuthentication>
-          </ExternalAuthentications>
-        </OtherAuthentications> */}
       </DimissisKeyboard>
     </Wrapper>
   );

@@ -1,17 +1,18 @@
 import { create } from "apisauce";
 import Config from "../config";
+import { LoginData, RegisterData } from "../entities";
 
 export const api = create({
   baseURL: Config.baseURL,
 });
 
 const Api = {
-  login: ({ email, password }: any) =>
+  login: ({ email, password }: LoginData) =>
     api.post("/medico/autenticar", {
       email,
       senha: password,
     }),
-  register: ({ name, cpf, crm, genre, email, password }: any) =>
+  register: ({ name, cpf, crm, genre, email, password }: RegisterData) =>
     api.post("/medico", {
       nome: name,
       senha: password,

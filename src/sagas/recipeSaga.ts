@@ -8,7 +8,7 @@ import { transformRecipes } from "../transforms";
 import attendanceSelector from "../selectors/attendanceSelector";
 import { downloadPDF } from "../utils";
 
-function* requestRegisterRecipe(action: any) {
+function* requestRegisterRecipe(action: any): any {
   const { payload } = action;
   const attendanceId = yield select(attendanceSelector.getAttendanceId);
   const response = yield call(Api.registerRecipe, { attendanceId, ...payload });
@@ -22,7 +22,7 @@ function* requestRegisterRecipe(action: any) {
   alert("Cadastrado!");
 }
 
-function* requestFilterRecipe(action: any) {
+function* requestFilterRecipe(action: any): any {
   const { payload } = action;
   const attendanceId = yield select(attendanceSelector.getAttendanceId);
   const response = yield call(Api.searchRecipe, { attendanceId, ...payload });
@@ -37,7 +37,7 @@ function* requestFilterRecipe(action: any) {
   yield put(RecipeActions.entities.setRecipes(transformedData));
 }
 
-function* requestRecipes() {
+function* requestRecipes(): any {
   const attendanceId = yield select(attendanceSelector.getAttendanceId);
   if (attendanceId) {
     const response = yield call(Api.getRecipes, { attendanceId });
@@ -52,7 +52,7 @@ function* requestRecipes() {
   }
 }
 
-function* requestPDFRecipe(action: any) {
+function* requestPDFRecipe(action: any): any {
   const { payload } = action;
   const response = yield call(Api.getRecipePDF, payload);
 
