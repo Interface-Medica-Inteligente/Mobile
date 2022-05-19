@@ -7,7 +7,10 @@ export interface RegisterData {
   name: string;
   cpf: string;
   crm: string;
-  genre: string;
+  genre: {
+    key: string;
+    label: string;
+  } | null;
   email: string;
   password: string;
 }

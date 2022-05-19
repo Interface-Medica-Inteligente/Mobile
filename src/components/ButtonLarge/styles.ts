@@ -27,7 +27,7 @@ export const Button = styled.TouchableOpacity<{
 export const Text = styled.Text`
   font-style: normal;
   font-weight: 400;
-  font-size: 18;
+  font-size: 18px;
   line-height: 22px;
   text-align: center;
   color: #ffffff;

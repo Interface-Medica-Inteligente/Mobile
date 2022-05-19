@@ -1,6 +1,6 @@
 import { create } from "apisauce";
 import Config from "../config";
-import { LoginData, RegisterData } from "../entities";
+import { LoginData, RecordData, RegisterData } from "../entities";
 
 export const api = create({
   baseURL: Config.baseURL,
@@ -17,7 +17,7 @@ const Api = {
       nome: name,
       senha: password,
       email,
-      sexo: genre,
+      sexo: genre?.key,
       crm,
       cpf,
     }),
@@ -37,7 +37,7 @@ const Api = {
         cpf,
         nome: name,
         email: "",
-        sexo: genre,
+        sexo: genre?.key,
         dataNascimento: birthDate,
         nomeMae: momName,
         nomePai: dadName,

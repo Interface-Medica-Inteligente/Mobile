@@ -1,10 +1,12 @@
 import React from "react";
-import { Button, Text } from "./styles";
+import { Button, Image } from "./styles";
+
+const chevronRight = require("../../assets/chevron-right.png");
 
 const ButtonSmall = ({ ...rest }) => {
   return (
     <Button {...rest}>
-      <Text>{">"}</Text>
+      <Image source={chevronRight} />
     </Button>
   );
 };

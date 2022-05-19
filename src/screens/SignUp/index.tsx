@@ -22,6 +22,7 @@ import { ButtonLarge } from "../../components/ButtonLarge";
 import { Controller, useForm } from "react-hook-form";
 import doctorSelector from "../../selectors/doctorSelector";
 import { RegisterData } from "../../entities";
+import { Select } from "../../components/Select";
 
 type registerScreenProp = StackNavigationProp<RootStackParamList, "SignUp">;
 
@@ -99,6 +100,21 @@ const SignUp = () => {
                 autoCorrect={false}
                 value={value}
                 onChangeText={onChange}
+              />
+            )}
+          />
+          <Controller
+            name="genre"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <Select
+                data={[
+                  { key: "M", label: "Masculino" },
+                  { key: "F", label: "Feminino" },
+                ]}
+                value={value}
+                onChange={onChange}
+                placeholder="Sexo"
               />
             )}
           />

@@ -14,11 +14,11 @@ function* requestRegisterRecipe(action: any): any {
   const attendanceId = yield select(attendanceSelector.getAttendanceId);
   const response = yield call(Api.registerRecipe, { attendanceId, ...payload });
 
-  // if (!response.ok) {
-  //   alert("Erro ao realizar cadastro");
-  //   yield put(RecipeActions.ui.failure("erro"));
-  //   return;
-  // }
+  if (!response.ok) {
+    alert("Erro ao realizar cadastro");
+    yield put(RecipeActions.ui.failure("erro"));
+    return;
+  }
 
   yield put(RecipeActions.ui.success());
   navigationService.navigate("Laudo");

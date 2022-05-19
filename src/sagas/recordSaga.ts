@@ -12,14 +12,14 @@ import { RecordData } from "../entities";
 
 function* requestRegisterRecord(action: PayloadAction<RecordData>): any {
   const { payload } = action;
-  const doctorId = yield select(doctorSelector.getDoctorId);
+  const doctorId: number = yield select(doctorSelector.getDoctorId);
   const response = yield call(Api.registerRecord, { doctorId, ...payload });
 
-  // if (!response.ok) {
-  //   alert(response.data.error);
-  //   yield put(RecordActions.ui.failure(response.data.error));
-  //   return;
-  // }
+  if (!response.ok) {
+    alert(response.data.error);
+    yield put(RecordActions.ui.failure(response.data.error));
+    return;
+  }
 
   yield put(RecordActions.entities.setRecord(payload));
   yield put(AttendanceActions.entities.setAttendanceId(response.data));
@@ -35,6 +35,7 @@ function* requestSearchRecord(action: any): any {
     alert("Erro ao realizar busca");
     return;
   }
+
   const transformedData = transformRecord(response.data);
   yield put(RecordActions.entities.setRecord(transformedData));
   yield put(
