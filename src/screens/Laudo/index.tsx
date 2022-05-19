@@ -1,39 +1,59 @@
 import React from "react";
-import { View, Text, ImageSourcePropType } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { RootStackParamList } from "../../stacks/MainStack";
+import { Text } from "react-native";
 
 import {
   Wrapper,
   Authentication,
   DimissisKeyboard,
-  PaginationButton,
   MetricsPacient,
-  Buttons
+  Buttons,
 } from "./styles";
+
 import { Input } from "../../components/Input";
 import { ButtonSmall } from "../../components/ButtonSmall";
-import { ButtonLarge } from "../../components/ButtonLarge";
 import { Controller, useForm } from "react-hook-form";
-import { Select } from "../../components/Select";
-
-type laudoScreenProp = StackNavigationProp<
-  RootStackParamList,
-  "Laudo"
->;
+import { useDispatch } from "react-redux";
+import Api from "../../services/api";
+import useRecord from "../../hooks/useRecord";
+import { Actions as ReportActions } from "../../reducers/report";
 
 const Laudo = () => {
-  const navigation = useNavigation<laudoScreenProp>();
+  const dispatch = useDispatch();
+  const { control, handleSubmit, setValue, getValues } = useForm();
 
-  const { control, handleSubmit } = useForm();
+  useRecord({ setValue });
+
+  const onSubmit = (data: any) =>
+    dispatch(ReportActions.ui.requestRegisterReport(data));
+
+  const onBlurCNES = () => {
+    const cnes = getValues("cnes");
+    Api.getEstablishmentName({ cnes })
+      .then((response: any) => {
+        setValue("establishmentName", response?.data.nomeEstabelecimento);
+      })
+      .catch(() => {
+        setValue("establishmentName", "");
+      });
+  };
+
+  const onBlurCid = () => {
+    const cid = getValues("cid");
+    Api.getDiagnosis({ cid })
+      .then((response: any) => {
+        setValue("diagnosis", response?.data.descricao);
+      })
+      .catch(() => {
+        setValue("diagnosis", "");
+      });
+  };
 
   return (
     <Wrapper>
       <DimissisKeyboard>
         <Authentication>
           <Controller
-            name="codigoCNES"
+            name="cnes"
             control={control}
             render={({ field: { value, onChange } }) => (
               <Input
@@ -42,12 +62,13 @@ const Laudo = () => {
                 autoCapitalize="none"
                 autoCorrect={false}
                 value={value}
+                onBlur={onBlurCNES}
                 onChangeText={onChange}
               />
             )}
           />
           <Controller
-            name="nomedaUSS"
+            name="establishmentName"
             control={control}
             render={({ field: { value, onChange } }) => (
               <Input
@@ -61,7 +82,7 @@ const Laudo = () => {
             )}
           />
           <Controller
-            name="nomePaciente"
+            name="name"
             control={control}
             render={({ field: { value, onChange } }) => (
               <Input
@@ -75,7 +96,7 @@ const Laudo = () => {
             )}
           />
           <Controller
-            name="nomedamae"
+            name="momName"
             control={control}
             render={({ field: { value, onChange } }) => (
               <Input
@@ -89,41 +110,41 @@ const Laudo = () => {
             )}
           />
           <MetricsPacient>
-          <Controller
-            name="peso"
-            control={control}
-            render={({ field: { value, onChange } }) => (
-              <Input
-                placeholder="Peso (Kg)"
-                autoCompleteType="cc-number"
-                autoCapitalize="none"
-                keyboardType="numeric"
-                autoCorrect={false}
-                value={value}
-                onChangeText={onChange}
-                style={{ width: "48%"}}
-              />
-            )}
-          />
-          <Controller
-            name="altura"
-            control={control}
-            render={({ field: { value, onChange } }) => (
-              <Input
-                placeholder="Altura (cm)"
-                autoCompleteType="cc-number"
-                autoCapitalize="none"
-                keyboardType="numeric"
-                autoCorrect={false}
-                value={value}
-                onChangeText={onChange}
-                style={{ width: "48%" }}
-              />
-            )}
-          />
+            <Controller
+              name="weight"
+              control={control}
+              render={({ field: { value, onChange } }) => (
+                <Input
+                  placeholder="Peso (Kg)"
+                  autoCompleteType="cc-number"
+                  autoCapitalize="none"
+                  keyboardType="numeric"
+                  autoCorrect={false}
+                  value={value}
+                  onChangeText={onChange}
+                  style={{ width: "48%" }}
+                />
+              )}
+            />
+            <Controller
+              name="height"
+              control={control}
+              render={({ field: { value, onChange } }) => (
+                <Input
+                  placeholder="Altura (cm)"
+                  autoCompleteType="cc-number"
+                  autoCapitalize="none"
+                  keyboardType="numeric"
+                  autoCorrect={false}
+                  value={value}
+                  onChangeText={onChange}
+                  style={{ width: "48%" }}
+                />
+              )}
+            />
           </MetricsPacient>
           <Controller
-            name="cid10"
+            name="cid"
             control={control}
             render={({ field: { value, onChange } }) => (
               <Input
@@ -133,12 +154,13 @@ const Laudo = () => {
                 keyboardType="numeric"
                 autoCorrect={false}
                 value={value}
+                onBlur={onBlurCid}
                 onChangeText={onChange}
               />
             )}
           />
           <Controller
-            name="diagnostico"
+            name="diagnosis"
             control={control}
             render={({ field: { value, onChange } }) => (
               <Input
@@ -164,15 +186,21 @@ const Laudo = () => {
                 onChangeText={onChange}
                 multiline={true}
                 numberOfLines={5}
-                style={{ height: '15%', textAlignVertical: 'top', padding: '5%', justifyContent: 'flex-start' }}
+                style={{
+                  height: "15%",
+                  textAlignVertical: "center",
+                  padding: "5%",
+                  justifyContent: "flex-start",
+                }}
               />
             )}
           />
-          <Text>Paciente realizou tratamento prévio ou se está em
-                tratamento da doença
+          <Text>
+            Paciente realizou tratamento prévio ou se está em tratamento da
+            doença
           </Text>
           <Buttons>
-            <ButtonSmall />
+            <ButtonSmall onPress={handleSubmit(onSubmit)} />
           </Buttons>
         </Authentication>
       </DimissisKeyboard>

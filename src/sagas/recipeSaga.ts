@@ -7,19 +7,21 @@ import Api from "../services/api";
 import { transformRecipes } from "../transforms";
 import attendanceSelector from "../selectors/attendanceSelector";
 import { downloadPDF } from "../utils";
+import navigationService from "../services/navigationService";
 
 function* requestRegisterRecipe(action: any): any {
   const { payload } = action;
   const attendanceId = yield select(attendanceSelector.getAttendanceId);
   const response = yield call(Api.registerRecipe, { attendanceId, ...payload });
 
-  if (!response.ok) {
-    alert("Erro ao realizar cadastro");
-    yield put(RecipeActions.ui.failure("erro"));
-    return;
-  }
-  console.log(response.data);
-  alert("Cadastrado!");
+  // if (!response.ok) {
+  //   alert("Erro ao realizar cadastro");
+  //   yield put(RecipeActions.ui.failure("erro"));
+  //   return;
+  // }
+
+  yield put(RecipeActions.ui.success());
+  navigationService.navigate("Laudo");
 }
 
 function* requestFilterRecipe(action: any): any {

@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../stacks/MainStack";
 
@@ -15,6 +14,10 @@ import { ButtonSmall } from "../../components/ButtonSmall";
 import { ButtonLarge } from "../../components/ButtonLarge";
 import { Controller, useForm } from "react-hook-form";
 import { Select } from "../../components/Select";
+import useRecord from "../../hooks/useRecord";
+import { useDispatch } from "react-redux";
+import { Actions as RecordActions } from "../../reducers/record";
+import { RecordData } from "../../entities";
 
 type prontuarioScreenProp = StackNavigationProp<
   RootStackParamList,
@@ -22,16 +25,22 @@ type prontuarioScreenProp = StackNavigationProp<
 >;
 
 const Prontuario = () => {
-  const navigation = useNavigation<prontuarioScreenProp>();
+  const dispatch = useDispatch();
 
-  const { control, handleSubmit } = useForm();
+  const { control, handleSubmit, setValue } = useForm<RecordData>();
+
+  const onSubmit = (data: RecordData) => {
+    dispatch(RecordActions.ui.requestRegisterRecord(data));
+  };
+
+  useRecord({ setValue });
 
   return (
     <Wrapper>
       <DimissisKeyboard>
         <Authentication>
           <Controller
-            name="nomePaciente"
+            name="name"
             control={control}
             render={({ field: { value, onChange } }) => (
               <Input
@@ -45,7 +54,7 @@ const Prontuario = () => {
             )}
           />
           <Controller
-            name="dataNascimento"
+            name="birthDate"
             control={control}
             render={({ field: { value, onChange } }) => (
               <Input
@@ -60,7 +69,7 @@ const Prontuario = () => {
           />
           <MetricsPacient>
             <Controller
-              name="altura"
+              name="height"
               control={control}
               render={({ field: { value, onChange } }) => (
                 <Input
@@ -69,14 +78,14 @@ const Prontuario = () => {
                   autoCapitalize="none"
                   keyboardType="numeric"
                   autoCorrect={false}
-                  value={value}
+                  value={String(value || "")}
                   onChangeText={onChange}
                   style={{ width: "45%", marginRight: "10%" }}
                 />
               )}
             />
             <Controller
-              name="peso"
+              name="weight"
               control={control}
               render={({ field: { value, onChange } }) => (
                 <Input
@@ -85,7 +94,7 @@ const Prontuario = () => {
                   autoCapitalize="none"
                   keyboardType="numeric"
                   autoCorrect={false}
-                  value={value}
+                  value={String(value || "")}
                   onChangeText={onChange}
                   style={{ width: "45%" }}
                 />
@@ -108,7 +117,7 @@ const Prontuario = () => {
             )}
           />
           <Controller
-            name="sexo"
+            name="genre"
             control={control}
             render={({ field: { value, onChange } }) => (
               <Select
@@ -123,7 +132,7 @@ const Prontuario = () => {
             )}
           />
           <Controller
-            name="nomeMae"
+            name="momName"
             control={control}
             render={({ field: { value, onChange } }) => (
               <Input
@@ -137,7 +146,7 @@ const Prontuario = () => {
             )}
           />
           <Controller
-            name="nomePai"
+            name="dadName"
             control={control}
             render={({ field: { value, onChange } }) => (
               <Input
@@ -156,11 +165,7 @@ const Prontuario = () => {
               secondary
               style={{ marginRight: "8%" }}
             />
-            <ButtonSmall
-              onPress={() => {
-                navigation.navigate("Receita");
-              }}
-            />
+            <ButtonSmall onPress={handleSubmit(onSubmit)} />
           </Buttons>
         </Authentication>
       </DimissisKeyboard>

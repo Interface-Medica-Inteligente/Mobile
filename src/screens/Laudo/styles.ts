@@ -1,27 +1,27 @@
-import styled from 'styled-components/native'
+import styled from "styled-components/native";
 
 export const Wrapper = styled.SafeAreaView`
   flex: 1;
   align-items: center;
   justify-content: center;
   background-color: #fff;
-  padding-top: 15%;
-`
+  padding: 15% 0px;
+`;
 
 export const DimissisKeyboard = styled.Pressable`
-  display: flex;
-  width: 100%;
-  height: 100%;
+  flex-grow: 1;
   align-items: center;
   justify-content: center;
-`
+`;
 
-export const Authentication = styled.ScrollView`
-  width: 85%;
-  margin-top: 15%;
-  flex: 1;
-  align-self: center;
-`
+export const Authentication = styled.ScrollView.attrs({
+  showsVerticalScrollIndicator: false,
+  contentContainerStyle: {
+    width: "85%",
+    paddingTop: 50,
+    paddingBottom: 100,
+  },
+})``;
 
 export const PaginationButton = styled.TouchableOpacity`
   width: 311px;
@@ -32,7 +32,7 @@ export const PaginationButton = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   margin-bottom: 45px;
-`
+`;
 
 export const MetricsPacient = styled.View`
   display: flex;

@@ -31,6 +31,7 @@ const MainStack = () => {
       screenOptions={{
         header: () => <Header />,
         cardStyle: {
+          flex: 1,
           backgroundColor: "#fff",
         },
       }}

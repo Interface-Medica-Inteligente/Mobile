@@ -16,7 +16,7 @@ const chevronUp = require("../../assets/chevron-up.png");
 type Item = { key: string; label: any };
 interface Props {
   data: Item[];
-  value: Item;
+  value: Item | null;
   placeholder?: string;
   onChange: (item: Item) => void;
 }
