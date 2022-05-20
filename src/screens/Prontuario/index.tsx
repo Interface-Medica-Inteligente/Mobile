@@ -17,6 +17,7 @@ import { Select } from "../../components/Select";
 import useRecord from "../../hooks/useRecord";
 import { useDispatch } from "react-redux";
 import { Actions as RecordActions } from "../../reducers/record";
+import { Actions as DialogActions } from "../../reducers/dialog";
 import { RecordData } from "../../entities";
 
 type prontuarioScreenProp = StackNavigationProp<
@@ -164,6 +165,7 @@ const Prontuario = () => {
               text="Buscar Prontuário"
               secondary
               style={{ marginRight: "8%" }}
+              onPress={() => dispatch(DialogActions.ui.openDialog("RECORD"))}
             />
             <ButtonSmall onPress={handleSubmit(onSubmit)} />
           </Buttons>

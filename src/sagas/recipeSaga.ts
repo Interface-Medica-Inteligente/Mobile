@@ -29,8 +29,10 @@ function* requestFilterRecipe(action: any): any {
   const attendanceId = yield select(attendanceSelector.getAttendanceId);
   const response = yield call(Api.searchRecipe, { attendanceId, ...payload });
 
+  console.log(response);
+
   if (!response.ok) {
-    alert("Erro ao realizar busca");
+    // alert("Erro ao realizar busca");
     yield put(RecipeActions.entities.setRecipes([]));
     return;
   }
@@ -58,7 +60,9 @@ function* requestPDFRecipe(action: any): any {
   const { payload } = action;
   const response = yield call(Api.getRecipePDF, payload);
 
-  downloadPDF(response.data, "receita");
+  console.log(response);
+
+  yield call(downloadPDF, response.data, "receita");
 }
 
 export default function* sagas() {

@@ -1,9 +1,23 @@
-export const downloadPDF = (pdf, name) => {
-  const linkSource = `data:application/pdf;base64,${pdf}`
-  const downloadLink = document.createElement('a')
-  const fileName = `${name}.pdf`
+import * as Sharing from "expo-sharing";
+import * as FileSystem from "expo-file-system";
 
-  downloadLink.href = linkSource
-  downloadLink.download = fileName
-  downloadLink.click()
-}
+export const downloadPDF = async (pdf: any, name: string) => {
+  try {
+    const fileDirectory = FileSystem.documentDirectory;
+    const fileName = `${name}.pdf`;
+    const path = `${fileDirectory}/${fileName}`;
+
+    await FileSystem.writeAsStringAsync(path, pdf, {
+      encoding: FileSystem.EncodingType.Base64,
+    });
+
+    await Sharing.shareAsync(path, {
+      mimeType: "application/pdf",
+      dialogTitle: "Compartilhar PDF",
+    });
+
+    await FileSystem.deleteAsync(path);
+  } catch {
+    return;
+  }
+};

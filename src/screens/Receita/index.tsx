@@ -16,7 +16,10 @@ import { ButtonSmall } from "../../components/ButtonSmall";
 import { ButtonLarge } from "../../components/ButtonLarge";
 import { Controller, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
+
 import { Actions as RecipeActions } from "../../reducers/recipe";
+import { Actions as DialogActions } from "../../reducers/dialog";
+
 import useRecord from "../../hooks/useRecord";
 import useRecipe from "../../hooks/useRecipe";
 import { RadioButton } from "../../components/RadioButton";
@@ -27,6 +30,10 @@ const Receita = () => {
 
   const onSubmit = (data: any) => {
     dispatch(RecipeActions.ui.requestRegisterRecipe(data));
+  };
+
+  const handlePDFRecipe = (data: any) => {
+    dispatch(RecipeActions.ui.requestPDFRecipe(data));
   };
 
   useRecord({ setValue });
@@ -133,9 +140,16 @@ const Receita = () => {
             )}
           />
 
-          <ButtonLarge text="Gerar PDF" />
+          <ButtonLarge
+            text="Gerar PDF"
+            onPress={handleSubmit(handlePDFRecipe)}
+          />
           <Buttons>
-            <ButtonLarge text="Buscar Receita" secondary />
+            <ButtonLarge
+              text="Buscar Receita"
+              secondary
+              onPress={() => dispatch(DialogActions.ui.openDialog("RECIPE"))}
+            />
             <ButtonSmall onPress={handleSubmit(onSubmit)} />
           </Buttons>
         </Authentication>

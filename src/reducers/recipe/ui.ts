@@ -18,13 +18,13 @@ const recipeUiSlice = createSlice({
     requestRegisterRecipe: (_state: State, _action: PayloadAction<any>) => {
       return { fetching: true, error: null };
     },
-    requestFilterRecipe: () => {
+    requestFilterRecipe: (_state: State, _action: PayloadAction<any>) => {
       return { fetching: true, error: null };
     },
-    requestPDFRecipe: () => {
+    requestPDFRecipe: (_state: State, _action: PayloadAction<any>) => {
       return { fetching: true, error: null };
     },
-    requestRecipes: () => {
+    requestRecipes: (_state: State, _action: PayloadAction<any>) => {
       return { fetching: true, error: null };
     },
     success: (_state: State) => {

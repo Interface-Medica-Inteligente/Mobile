@@ -15,6 +15,8 @@ function* requestRegisterRecord(action: PayloadAction<RecordData>): any {
   const doctorId: number = yield select(doctorSelector.getDoctorId);
   const response = yield call(Api.registerRecord, { doctorId, ...payload });
 
+  console.log(response);
+
   if (!response.ok) {
     alert(response.data.error);
     yield put(RecordActions.ui.failure(response.data.error));
@@ -30,6 +32,8 @@ function* requestRegisterRecord(action: PayloadAction<RecordData>): any {
 function* requestSearchRecord(action: any): any {
   const { payload } = action;
   const response = yield call(Api.searchRecord, payload);
+
+  console.log(response);
 
   if (!response.ok) {
     alert("Erro ao realizar busca");

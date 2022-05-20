@@ -103,17 +103,18 @@ const Api = {
       codigoCid10: cid,
       diagnostico: diagnosis,
       anamnese,
-      consultaPrevia: (response1 as any)[treatment],
+      consultaPrevia: (response1 as any)[treatment.key],
     }),
-  getRecipePDF: ({ name, medicines, quantity, use, description, via }: any) =>
-    api.post("/consulta/gerar-documento-receita", {
+  getRecipePDF: ({ name, medicines, quantity, use, description, via }: any) => {
+    return api.post("/consulta/gerar-documento-receita", {
       nomePaciente: name,
       medicamento: medicines,
       quantidade: String(quantity),
       uso: use,
       descricao: description,
-      via: (response2 as any)[via],
-    }),
+      via: (response2 as any)[via.key],
+    });
+  },
 };
 
 const response1 = {

@@ -1,3 +1,8 @@
+const LABEL = {
+  M: "Masculino",
+  F: "Feminino",
+};
+
 export const transformRecord = (data: any) => {
   return {
     name: data.nomePaciente,
@@ -7,14 +12,17 @@ export const transformRecord = (data: any) => {
     height: data.altura,
     weight: data.peso,
     cpf: data.cpf,
-    genre: data.sexo
-  }
-}
+    genre: {
+      key: data.sexo,
+      label: (LABEL as any)[data.sexo],
+    },
+  };
+};
 
 export const transformRecipes = (data: any[]) => {
-  return data.map(recipe => ({
+  return data.map((recipe) => ({
     id: recipe.receita,
     revenueDate: recipe.dataAtendimento,
-    medicines: recipe.medicamentos[0].nome
-  }))
-}
+    medicines: recipe.medicamentos[0].nome,
+  }));
+};
