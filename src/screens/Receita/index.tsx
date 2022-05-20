@@ -19,6 +19,7 @@ import { useDispatch } from "react-redux";
 import { Actions as RecipeActions } from "../../reducers/recipe";
 import useRecord from "../../hooks/useRecord";
 import useRecipe from "../../hooks/useRecipe";
+import { RadioButton } from "../../components/RadioButton";
 
 const Receita = () => {
   const dispatch = useDispatch();
@@ -112,6 +113,26 @@ const Receita = () => {
               />
             )}
           />
+          <Controller
+            name="via"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <RadioButton
+                containerStyle={{
+                  justifyContent: "space-between",
+                  paddingVertical: 10,
+                  paddingHorizontal: 10,
+                }}
+                data={[
+                  { key: "FIRST", label: "1ª via Farmácia" },
+                  { key: "SECOND", label: "2ª via Paciente" },
+                ]}
+                value={value}
+                onChange={onChange}
+              />
+            )}
+          />
+
           <ButtonLarge text="Gerar PDF" />
           <Buttons>
             <ButtonLarge text="Buscar Receita" secondary />

@@ -36,6 +36,7 @@ const MainStack = () => {
         },
       }}
     >
+      {true && <Stack.Screen name="Laudo" component={Laudo} />}
       <Stack.Screen
         name="SignIn"
         component={SignIn}
@@ -52,7 +53,6 @@ const MainStack = () => {
       />
       {isLogged && <Stack.Screen name="Prontuario" component={Prontuario} />}
       {isLogged && <Stack.Screen name="Receita" component={Receita} />}
-      {isLogged && <Stack.Screen name="Laudo" component={Laudo} />}
       {isLogged && <Stack.Screen name="Home" component={Home} />}
     </Stack.Navigator>
   );

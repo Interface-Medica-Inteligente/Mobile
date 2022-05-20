@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import Api from "../../services/api";
 import useRecord from "../../hooks/useRecord";
 import { Actions as ReportActions } from "../../reducers/report";
+import { RadioButton } from "../../components/RadioButton";
 
 const Laudo = () => {
   const insets = useSafeAreaInsets();
@@ -199,6 +200,23 @@ const Laudo = () => {
       <Text>
         Paciente realizou tratamento prévio ou se está em tratamento da doença
       </Text>
+      <Controller
+        name="treatment"
+        control={control}
+        render={({ field: { value, onChange } }) => (
+          <RadioButton
+            containerStyle={{
+              paddingVertical: 10,
+            }}
+            data={[
+              { key: "YES", label: "Sim" },
+              { key: "NO", label: "Não" },
+            ]}
+            value={value}
+            onChange={onChange}
+          />
+        )}
+      />
       <Buttons>
         <ButtonSmall onPress={handleSubmit(onSubmit)} />
       </Buttons>
